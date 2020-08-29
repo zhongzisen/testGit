@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div>
+		<button onclick='showVal()'>点击</button>
+	</div>
+	<script type="text/javascript">
+		let val = 1;
+		(function(){
+			setTimeout(function(){
+				val = 2;
+				console.log(`val = ${val}`);
+			},2000);
+
+
+			nowTime = Date.now();
+			while(Date.now() - nowTime < 1000){
+				// console.log(Date.now() - nowTime)
+			}
+
+			console.log(`val = ${val}`);
+		})();
+		function showVal(){
+			console.log(val);
+		}
+	</script>
+</body>
+</html>

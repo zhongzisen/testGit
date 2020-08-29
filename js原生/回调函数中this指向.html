@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>回调函数中this指向</title>
+</head>
+<body>
+<script type="text/javascript">
+	var name = 'window';
+	var obj = {
+		name: 'obj',
+		fn: function(){
+			setTimeout(() => {
+				console.log(this.name);
+			},1000)
+		}
+	}
+	obj.fn();
+
+
+
+	var o = {
+    	age : 12,
+    	say : function() {
+    		var that = this;
+        	function callback() {
+            	return that.age;
+        		}
+        	func(callback); 
+        	     	}
+	};
+
+	function func(callback) {
+	    var name = "Xiao Ming";
+	    console.log(name + " is " + callback() + " years old.");
+	}
+	o.say();
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mutationObserver</title>
+	<style type="text/css">
+		.red{
+			color: #994444;
+		}
+		.green{
+			color: #77ee99;
+		}		
+	</style>
+</head>
+<body>
+	<h2>MutationObserver（变动观察器）是监听DOM树变化的接口</h2>
+	<div id="test">
+		<h3>在哪里？</h3>
+		<h3>在家呢。</h3>
+		<h3 class="red">出来玩！</h3>
+	</div>
+	<h3>div外面</h3>
+	<button onclick='add()'>增加</button>
+	<button onclick='stopObserver()'>停止观察</button>
+	<button onclick='changeTargetAttr()'>改变观察目标的属性</button>
+	<script type="text/javascript">
+		var targetNode = document.getElementById('test');
+
+		// new MutationObserver 的参数是一个回调函数，用来处理节点变化后的回调函数
+		var observer = new MutationObserver(function(mutations){
+			var testChildren = document.querySelectorAll('#test > h3:not(.green)');
+			for (child of testChildren){
+				child.classList.add('green');
+			}
+		});
+		// observer开始观察，observer接受两个参数：
+		// 第一个参数：所要观察的DOM节点
+		// 第二个参数：配置对象
+		observer.observe(targetNode, {attributes: true, childList: true, subtree: true})
+		function add(){
+			label = document.createElement('h3');
+			label.innerText = '不去了，在家里管理时间呢！';
+			targetNode.append(label);
+		};
+		function stopObserver(){
+			// disconnect()用来停止观察，阻止观察者观察任何改变
+			observer.disconnect();
+		};
+		function changeTargetAttr(){
+			// console.log(targetNode.attributes);
+			targetNode.title= 'hahah';
+		};
+	</script>
+</body>
+</html>
